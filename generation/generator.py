@@ -106,6 +106,7 @@ class Generator(object):
                                        "gpt-3.5-turbo-16k-0613",
                                        "gpt-4", "gpt-4-0613"]
 
+        # TODO: change to Non-OpenAI API
         result = self._call_openai_api(
             engine=self.args.engine,
             prompt=prompts,
