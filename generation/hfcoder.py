@@ -6,6 +6,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 # TODO: Check if these models can be run on single GPU with (max) 10 GB VRAM (or minimum 5 GB)
 ENGINE_LIST = [
     "TheBloke/deepseek-coder-6.7B-base-GPTQ",
+    "TheBloke/deepseek-coder-6.7B-instruct-GPTQ"
     "microsoft/phi-2",
 ]
 
@@ -32,12 +33,14 @@ class CoderModel():
                                           device_map=device_map,
                                         #   revision="main"
                                           )
+    def __call_hf_model(self):
         start_time = time.time()
         result = None
         while result is None:
             # TODO: check if this code works on Pipeline ... or just work fine like openAI chat
             try:
                 if is_chat:
+                    # TODO: based on original code, this suppose to be instruct model
                     tokenized_chat = self.tokenizer.apply_chat_template(
                         prompt, 
                         tokenize=True, 
